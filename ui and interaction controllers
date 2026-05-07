@@ -1,0 +1,28 @@
+-- Logic for handling various game menus (Training, Sell, Rebirth, etc.)
+
+local function findGUIElements() 
+    print("[TrainingUIController] Looking for GUI elements...")
+    local GUI = PlayerGui:FindFirstChild("GUI")
+    if GUI then
+        local Frames = GUI:FindFirstChild("Frames")
+        v7 = Frames:FindFirstChild("Leveling")
+        -- Handle Level, Timer, and Name display logic
+    end
+end
+
+local function typewriterEffect(p1, p2, p3) 
+    -- Handles smooth text appearing in dialogue or notifications
+    p1.Visible = true
+    p1.Text = ""
+    for i = 1, #p2 do
+        p1.Text = string.sub(p2, 1, i)
+        task.wait(0.04)
+    end
+end
+
+-- Button Animation and Click Logic
+local function setupButtonAnimation(button)
+    button.MouseButton1Click:Connect(function()
+        -- Handle menu close/open animations
+    end)
+end
