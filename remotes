@@ -1,0 +1,24 @@
+---- Remotes ----
+-- This section handles all network communication events for the game.
+ReplicatedStorage.Remotes.DisplayGlobalAnnouncement
+ReplicatedStorage.Remotes.SendGlobalAnnouncement
+ReplicatedStorage.Events.UpdateTrainingGroundUI
+ReplicatedStorage.Events.RefreshSlotVisual
+ReplicatedStorage.Events.RedeemCode
+ReplicatedStorage.Events.RequestGift
+ReplicatedStorage.Events.ConfirmFusion
+ReplicatedStorage.Events.RequestRebirth
+ReplicatedStorage.Events.RequestEggPurchase
+ReplicatedStorage.Events.SpawnFish
+ReplicatedStorage.Events.RequestSell
+ReplicatedStorage.Events.UpdateBossStatus
+
+---- Remote References (Logic Examples) ----
+-- Source: ReplicatedStorage.Satchel.SatchelLoader
+-- Call: v31:FireServer(t.Tool)
+
+-- Source: StarterPlayer.StarterPlayerScripts.SellController
+-- Call: RequestSell:FireServer("Inventory")
+
+-- Source: StarterPlayer.StarterPlayerScripts.SettingsController
+-- Call: RedeemCode:FireServer(Text)
