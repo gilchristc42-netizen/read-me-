@@ -1,0 +1,15 @@
+---- World Attributes & Configuration ----
+
+-- Target: Workspace.EventSign (Model)
+-- [Attr] Message = "New Update soon..."
+-- [Attr] ReleaseDate = May 3, 2026
+
+-- Target: Workspace.Plot_User (Model)
+-- Manages unlocking floors and slots for fishing/units
+-- [Attr] OwnerId = 6103632408
+-- [Attr] Floor0.IsUnlocked = true
+-- [Attr] Floor1.Slots.Slot1.IsUnlocked = true
+-- [Attr] Floor4.IsUnlocked = false (Locked)
+
+-- Target: Workspace.Plot_User.BoxCollect.ActiveBox
+-- [Attr] CashValue = 20856
