@@ -1,0 +1,24 @@
+-- Character Animation State Machine
+
+function playAnimation(p1, p2, p3) 
+    -- Calculates weights for random animations (e.g., different idle/dance styles)
+    local sum = math.random(1, t[p1].totalWeight)
+    local count = 1
+    -- Logic for loading and playing the specific track
+end
+
+function onRunning(p1) 
+    local v2 = p1 / (v9 and v1:GetScale() or 1)
+    if v2 > 0.01 then
+        playAnimation("walk", 0.1, Humanoid)
+        v6 = "Running"
+    else
+        playAnimation("idle", 0.1, Humanoid)
+        v6 = "Standing"
+    end
+end
+
+-- Tool Specific Animations (Fishing Rods, etc.)
+function playToolAnimation(p1, p2, p3, p4)
+    -- Handles specific keyframes for tool usage
+end
