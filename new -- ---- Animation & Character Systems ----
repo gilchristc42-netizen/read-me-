@@ -1,0 +1,14 @@
+-- ---- Animation & Character Systems ----
+
+-- Internal BindableEvents (Nil Instances)
+local InternalEvents = {
+    "BackpackAdded",
+    "BackpackRemoved",
+    "BackpackEmpty"
+}
+
+-- Character Logic
+local CharacterSystems = {
+    Ragdoll = game.ReplicatedStorage:WaitForChild("SendRagdollChangesToClient"),
+    CameraFix = game.ReplicatedStorage:WaitForChild("FixPlayerCamera")
+}
