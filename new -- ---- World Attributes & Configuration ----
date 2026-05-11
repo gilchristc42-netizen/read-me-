@@ -1,0 +1,30 @@
+-- ---- World Attributes & Configuration ----
+
+-- Christmas Event Configuration
+local ChristmasEvent = {
+    Spinwheel = {
+        EmitDelay = 0,
+        TogglesWindow = "ChristmasSpin",
+        TimeBeforeReset = 0
+    },
+    Shop = {
+        TogglesWindow = "ChristmasShop",
+        IncomePerGift = 0
+    }
+}
+
+-- Fuse Machine States (RGB Colors)
+local MachineLevels = {
+    Level1 = Color3.new(0.38, 0.27, 0.54), -- Reveal 1 1
+    Level2 = Color3.new(0.35, 0.45, 0.61),
+    Level3 = Color3.new(0.24, 0.51, 0.38),
+    Level4 = Color3.new(0.68, 0.31, 0.25),
+    Level5 = Color3.new(0.86, 0.67, 0.00)  -- Reveal 5 5
+}
+
+-- Interaction Areas
+local Zones = {
+    RobuxShop = "LuckyBlocks",
+    FuseCars = "Fuse.Machine",
+    ShowEntered = true
+}
