@@ -1,0 +1,16 @@
+-- ---- UI & Interaction Controllers ----
+
+-- Spring Physics Constants
+local SpringConstants = {
+    Position = "_position0",
+    Velocity = "_velocity0",
+    Target = "_target",
+    Damper = "_damper",
+    Speed = "_speed"
+}
+
+-- Navigation & Notification
+local UI_Events = {
+    Notify = game.ReplicatedStorage:WaitForChild("NotifyPlayer"),
+    Tween = game.ReplicatedStorage.Modules.Tween:WaitForChild("ToClient")
+}
