@@ -1,0 +1,11 @@
+## 📡 Network Remotes
+| Name | Path | Type |
+| :--- | :--- | :--- |
+| `LeaderboardUpdated` | `Workspace.Leaderboards...LeaderboardService.LeaderboardUpdated` | RemoteEvent |
+| `PacketRemote` | `ReplicatedStorage.Modules.Packets.Packet.RemoteEvent` | RemoteEvent |
+| `CmdrFunction` | `ReplicatedStorage.CmdrClient.CmdrFunction` | RemoteFunction |
+| `CmdrEvent` | `ReplicatedStorage.CmdrClient.CmdrEvent` | RemoteEvent |
+| `ToClient` | `ReplicatedStorage.Modules.Tween.ToClient` | RemoteEvent |
+| `StartEventVisuals` | `ReplicatedStorage.StartEventVisuals` | RemoteEvent |
+| `NotifyPlayer` | `ReplicatedStorage.NotifyPlayer` | RemoteEvent |
+| `FixPlayerCamera` | `ReplicatedStorage.FixPlayerCamera` | RemoteEvent |
