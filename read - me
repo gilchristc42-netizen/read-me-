@@ -1,0 +1,49 @@
+These are the game paths you must reference when retrieving objects via game:GetService("ReplicatedStorage"):
+
+The Primary Data Packet Channel:
+
+game:GetService("ReplicatedStorage").Packages.Packets.Packet.RemoteEvent
+
+State & Inventory Synchronization Channels (ReplicaService):
+
+game:GetService("ReplicatedStorage").RemoteEvents.ReplicaRequestData
+
+game:GetService("ReplicatedStorage").RemoteEvents.ReplicaSet
+
+game:GetService("ReplicatedStorage").RemoteEvents.ReplicaSetValues
+
+game:GetService("ReplicatedStorage").RemoteEvents.ReplicaDestroy
+
+game:GetService("ReplicatedStorage").RemoteEvents.ReplicaBind
+
+game:GetService("ReplicatedStorage").RemoteEvents.ReplicaCreate
+
+game:GetService("ReplicatedStorage").RemoteEvents.ReplicaParent
+
+game:GetService("ReplicatedStorage").RemoteEvents.ReplicaSignal
+
+game:GetService("ReplicatedStorage").RemoteEvents.ReplicaWrite
+
+game:GetService("ReplicatedStorage").RemoteEvents.ReplicaTableRemove
+
+game:GetService("ReplicatedStorage").RemoteEvents.ReplicaTableInsert
+
+System Utilities & UI Events:
+
+game:GetService("ReplicatedStorage").Loader.LoadedEvent
+
+game:GetService("ReplicatedStorage").PopUpEvent
+
+game:GetService("ReplicatedStorage").CmdrClient.CmdrEvent
+
+game:GetService("ReplicatedStorage").CmdrClient.CmdrFunction
+ -- How the game sends packets under the hood:
+RemoteEvent:FireServer(v1)
+RemoteEvent:FireServer(v1, t2.Instances)
+RemoteEvent:FireServer()
+-- Standard latency execution
+v8:FireServer(p1.Id, ...)
+
+-- Unreliable/high-frequency execution (UFireServer)
+v13:FireServer(p1.Id, ...)-- Function invocation requesting server execution structures
+p1.Cmdr.RemoteFunction:InvokeServer(p2, { Data = p3 })
