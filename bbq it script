@@ -8,11 +8,11 @@ local player = Players.LocalPlayer
 
 -- == Configuration & States ==
 local Toggles = {
-    AutoCook = false,
-    AutoPlate = false,
-    AutoSell = false,
-    AutoBuy = false,
-    AutoBuyTotem = false,
+    AutoCook = true,      -- ON by default
+    AutoPlate = true,     -- ON by default
+    AutoSell = true,      -- ON by default
+    AutoBuy = true,       -- ON by default
+    AutoBuyTotem = true,  -- ON by default
     StackExploit = false,
     InstantPrompt = false
 }
@@ -23,7 +23,7 @@ local BuyThreshold = 100
 local MeatOptions = {
     "Raw Hotdog", "Raw Burger", "Raw Chicken", "Raw Salmon", 
     "Raw Ribs", "Raw Prime Rib", "Raw Brisket", "Raw Lobtser Tail", "Raw Lobster Tail",
-    "Raw Bigfoot Filet", "Raw Dragon", "Raw Demon", "Raw Whole Unicorn", "Raw Hydra", "Raw Wendigo"
+    "Raw Bigfoot Filet", "Raw Dragon", "Raw Demon", "Raw Whole Unicorn", "Raw Hydra", "Raw Wendigo", "Raw Chicken Nugget"
 }
 
 local TotemOptions = {
@@ -48,8 +48,24 @@ pcall(function()
     end
 end)
 
-local BuyTargets = {MeatOptions[1]} 
+-- DEFAULT SELECTED TARGETS
+local BuyTargets = {
+    "Raw Chicken Nugget", 
+    "Raw Wendigo", 
+    "Raw Hydra", 
+    "Raw Whole Unicorn", 
+    "Raw Demon", 
+    "Raw Dragon", 
+    "Raw Brisket", 
+    "Raw Prime Rib"
+} 
+
 local BuyTotemTargets = {} 
+-- Automatically select ALL totems by default (including newly scanned ones)
+for _, totem in ipairs(TotemOptions) do
+    table.insert(BuyTotemTargets, totem)
+end
+
 local ActionDelay = 0.3
 local MeatStates = {}
 
@@ -351,17 +367,15 @@ task.spawn(function()
     end
 end)
 
--- == Auto Buy Loop (FIXED REMOTES) ==
+-- == Auto Buy Loop ==
 task.spawn(function()
     while task.wait(1.5) do
         if Toggles.AutoBuy and #BuyTargets > 0 then
             for _, targetMeat in ipairs(BuyTargets) do
                 if countMeatStock(targetMeat) < BuyThreshold then
-                    -- 🛠️ FIX: Meat strictly uses BuyMeat remote
                     if ReplicatedStorage.Remotes:FindFirstChild("BuyMeat") then
                         ReplicatedStorage.Remotes.BuyMeat:FireServer(targetMeat, false)
                     else
-                        -- Extreme fallback just in case
                         ReplicatedStorage.Remotes.BuyShopItem:FireServer(targetMeat, false)
                     end
                     task.wait(0.3)
@@ -371,7 +385,6 @@ task.spawn(function()
         if Toggles.AutoBuyTotem and #BuyTotemTargets > 0 then
             for _, targetTotem in ipairs(BuyTotemTargets) do
                 if countMeatStock(targetTotem) < BuyThreshold then
-                    -- 🛠️ FIX: Totems strictly use BuyShopItem remote
                     if ReplicatedStorage.Remotes:FindFirstChild("BuyShopItem") then
                         ReplicatedStorage.Remotes.BuyShopItem:FireServer(targetTotem, false)
                     end
@@ -489,9 +502,12 @@ local function createToggle(parent, name, yPos, varName)
     local btn = Instance.new("TextButton")
     btn.Size = UDim2.new(0.85, 0, 0, 35)
     btn.Position = UDim2.new(0.075, 0, 0, yPos)
-    btn.BackgroundColor3 = Color3.fromRGB(40, 40, 45)
-    btn.Text = name .. " [OFF]"
-    btn.TextColor3 = Color3.fromRGB(200, 200, 200)
+    
+    local isOn = Toggles[varName]
+    btn.BackgroundColor3 = isOn and Color3.fromRGB(255, 120, 50) or Color3.fromRGB(40, 40, 45)
+    btn.Text = name .. (isOn and " [ON]" or " [OFF]")
+    btn.TextColor3 = isOn and Color3.fromRGB(255, 255, 255) or Color3.fromRGB(200, 200, 200)
+    
     btn.Font = Enum.Font.GothamBold
     btn.TextSize = 13
     Instance.new("UICorner", btn).CornerRadius = UDim.new(0, 6)
@@ -530,7 +546,12 @@ local function createDropdown(parent, labelPrefix, yPos, options, targetTable)
     mainBtn.Size = UDim2.new(0.85, 0, 0, 35)
     mainBtn.Position = UDim2.new(0.075, 0, 0, yPos)
     mainBtn.BackgroundColor3 = Color3.fromRGB(30, 30, 35)
-    mainBtn.Text = labelPrefix .. (#targetTable > 0 and string.sub(targetTable[1], 1, 15) or "None")
+    
+    local initialText = labelPrefix .. "None"
+    if #targetTable == 1 then initialText = labelPrefix .. string.sub(targetTable[1], 1, 15)
+    elseif #targetTable > 1 then initialText = labelPrefix .. #targetTable .. " Selected" end
+    
+    mainBtn.Text = initialText
     mainBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
     mainBtn.Font = Enum.Font.Gotham
     mainBtn.TextSize = 13
@@ -680,4 +701,4 @@ warningLabel.Parent = pageExploits
 createToggle(pageExploits, "Instant Interact (Zero Delay)", 140, "InstantPrompt")
 createActionButton(pageExploits, "🧹 Auto Clear Entire Yard", 185, clearYard)
 
-print("✅ BBQ Mastery v12 (Auto-Buy Remote Split Fix) Loaded!") can u make these features auto turn on? like auto cook auto plate auto sell auto buy then auto buy  raw Chicken Nugget Raw Wendigo Raw Hyrdra raw whole unicorn raw demon raw dragon  raw brisket Raw prime rib
+print("✅ BBQ Mastery v15 (All Totems Default ON) Loaded!")
